@@ -10,7 +10,7 @@ public class PertTests
         PertEstimate pert = new PertEstimate();
         const int expectedEstimate = 0;
         
-        var returnedEstimate = PertEstimate.CreatePert(0, 0, 0);
+        var returnedEstimate = pert.CreatePert(0, 0, 0);
 
         Assert.Equal(expectedEstimate, returnedEstimate);
     }
