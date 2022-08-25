@@ -1,4 +1,6 @@
 # The Estimator
+[![Build and Test](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml)
+
 **I'll be back... to tell you that you way underestimated what you're about to estimate.**
 
 This RESTful API was built to be used for a frontend app to generate different types of estimates.
