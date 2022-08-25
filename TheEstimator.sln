@@ -3,6 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{34950371-9942-4CD3-9384-3B63312CA573}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheEstimator", "src\TheEstimator\TheEstimator.csproj", "{56F54EDC-0BDA-4012-A21D-64860727F1B3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{8B0CC027-8934-4F92-9550-3994B03E9017}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheEstimator.Tests", "test\TheEstimator.Tests\TheEstimator.Tests.csproj", "{F1F630C2-06D6-45FB-981D-EF4C6DA647A0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +20,17 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56F54EDC-0BDA-4012-A21D-64860727F1B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56F54EDC-0BDA-4012-A21D-64860727F1B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56F54EDC-0BDA-4012-A21D-64860727F1B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56F54EDC-0BDA-4012-A21D-64860727F1B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F630C2-06D6-45FB-981D-EF4C6DA647A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F630C2-06D6-45FB-981D-EF4C6DA647A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F630C2-06D6-45FB-981D-EF4C6DA647A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F630C2-06D6-45FB-981D-EF4C6DA647A0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{56F54EDC-0BDA-4012-A21D-64860727F1B3} = {34950371-9942-4CD3-9384-3B63312CA573}
+		{F1F630C2-06D6-45FB-981D-EF4C6DA647A0} = {8B0CC027-8934-4F92-9550-3994B03E9017}
 	EndGlobalSection
 EndGlobal
