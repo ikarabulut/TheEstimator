@@ -1,4 +1,4 @@
-namespace TheEstimator.Tests;
+namespace TheEstimator.Tests.EstimateTypeTests;
 
 public class UnitTest1
 {
