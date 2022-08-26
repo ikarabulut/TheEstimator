@@ -17,7 +17,7 @@ public class InMemoryRepositoryFake : IRepository
     {
         newEstimate.Id = _estimates.Count + 1;
         newEstimate.CalculatedEstimate =
-            new PertCalculator().CalculatePert(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
+            new PertCalculator().CalculateEstimate(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
         _estimates.Add(newEstimate);
         return newEstimate;
     }
