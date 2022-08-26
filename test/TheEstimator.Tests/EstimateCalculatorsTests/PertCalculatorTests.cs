@@ -20,7 +20,7 @@ public class PertCalculatorTests
     {
         PertCalculator calculator = new PertCalculator();
         var disallowedNegativeParam = -1;
-
+    
         Assert.Throws<ArgumentException>(() => calculator.CalculateEstimate(disallowedNegativeParam, 0, 0));
     }
 }

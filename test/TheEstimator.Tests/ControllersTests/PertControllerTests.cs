@@ -45,10 +45,10 @@ public class PertControllerTests
     }
 
     [Fact]
-    public void Post_InvalidObjectPassed_ReturnsBadRequest()
+    public void Post_NegativeValuePassed_ReturnsBadRequest()
     {
-        Estimate invalidEstimate = new Estimate { Pessimistic = 0, MostLikely = 0 };
-        _controller.ModelState.AddModelError("Optimistic", "Required");
+        Estimate invalidEstimate = new Estimate { Optimistic = -1, Pessimistic = 0, MostLikely = 0 };
+        _controller.ModelState.AddModelError("Optimistic", "Value cannot be negative");
 
         var badResponse = _controller.Create(invalidEstimate);
 
