@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TheEstimator.EstimateCalculators;
 using TheEstimator.Models;
 using TheEstimator.Repository;
 
@@ -9,10 +10,12 @@ namespace TheEstimator.Controllers;
 public class PertController : ControllerBase
 {
     private readonly IRepository _repository;
+    private readonly IEstimateCalculator _calculator;
 
     public PertController(IRepository repository)
     {
         _repository = repository;
+        _calculator = new PertCalculator();
     }
 
     [HttpPost]
@@ -23,7 +26,7 @@ public class PertController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var createdEstimate = _repository.Add(estimate);
+        var createdEstimate = _repository.Add(estimate, _calculator);
 
         return CreatedAtAction(nameof(Create), new { id = createdEstimate.Id }, createdEstimate);
     }

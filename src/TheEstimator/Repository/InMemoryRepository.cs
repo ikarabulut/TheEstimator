@@ -11,11 +11,11 @@ public class InMemoryRepository : IRepository
         _estimates = new List<Estimate>();
     }
 
-    public Estimate Add(Estimate newEstimate)
+    public Estimate Add(Estimate newEstimate, IEstimateCalculator calculator)
     {
         newEstimate.Id = _estimates.Count + 1;
         newEstimate.CalculatedEstimate =
-            new PertCalculator().CalculateEstimate(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
+            calculator.CalculateEstimate(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
         _estimates.Add(newEstimate);
         return newEstimate;
     }
