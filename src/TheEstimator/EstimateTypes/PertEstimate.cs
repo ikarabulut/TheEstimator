@@ -1,4 +1,4 @@
-namespace TheEstimator.EstimateTypes;
+﻿namespace TheEstimator.EstimateTypes;
 
 public class PertEstimate
 {

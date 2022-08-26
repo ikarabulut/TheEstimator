@@ -1,4 +1,4 @@
-using TheEstimator.EstimateTypes;
+﻿using TheEstimator.EstimateTypes;
 
 namespace TheEstimator.Tests.EstimateTypeTests;
 
@@ -9,7 +9,7 @@ public class PertTests
     {
         PertEstimate pert = new PertEstimate();
         const int expectedEstimate = 0;
-        
+
         var returnedEstimate = pert.CreatePert(0, 0, 0);
 
         Assert.Equal(expectedEstimate, returnedEstimate);
