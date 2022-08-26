@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheEstimator.Controllers;
-using TheEstimator.EstimateTypes;
+using TheEstimator.EstimateCalculators;
 using TheEstimator.Models;
 using TheEstimator.Repository;
 
@@ -17,7 +17,7 @@ public class InMemoryRepositoryFake : IRepository
     {
         newEstimate.Id = _estimates.Count + 1;
         newEstimate.CalculatedEstimate =
-            new PertEstimate().CreatePert(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
+            new PertCalculator().CalculatePert(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
         _estimates.Add(newEstimate);
         return newEstimate;
     }

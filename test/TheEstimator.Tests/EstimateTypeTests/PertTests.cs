@@ -1,4 +1,4 @@
-﻿using TheEstimator.EstimateTypes;
+﻿using TheEstimator.EstimateCalculators;
 
 namespace TheEstimator.Tests.EstimateTypeTests;
 
@@ -7,10 +7,10 @@ public class PertTests
     [Fact]
     public void CreatePert_AllZeros_ReturnsZero()
     {
-        PertEstimate pert = new PertEstimate();
+        PertCalculator pert = new PertCalculator();
         const int expectedEstimate = 0;
 
-        var returnedEstimate = pert.CreatePert(0, 0, 0);
+        var returnedEstimate = pert.CalculatePert(0, 0, 0);
 
         Assert.Equal(expectedEstimate, returnedEstimate);
     }

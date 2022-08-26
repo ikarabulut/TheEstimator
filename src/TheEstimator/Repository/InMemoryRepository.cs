@@ -1,4 +1,4 @@
-﻿using TheEstimator.EstimateTypes;
+﻿using TheEstimator.EstimateCalculators;
 using TheEstimator.Models;
 
 namespace TheEstimator.Repository;
@@ -15,7 +15,7 @@ public class InMemoryRepository : IRepository
     {
         newEstimate.Id = _estimates.Count + 1;
         newEstimate.CalculatedEstimate =
-            new PertEstimate().CreatePert(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
+            new PertCalculator().CalculatePert(newEstimate.MostLikely, newEstimate.Optimistic, newEstimate.Pessimistic);
         _estimates.Add(newEstimate);
         return newEstimate;
     }
