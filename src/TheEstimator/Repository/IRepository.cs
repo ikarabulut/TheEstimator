@@ -5,5 +5,5 @@ namespace TheEstimator.Repository;
 
 public interface IRepository
 {
-    Estimate Add(Estimate newEstimate, IEstimateCalculator calculator);
+    Estimate Add(Estimate newEstimate, int generatedEstimate);
 }
