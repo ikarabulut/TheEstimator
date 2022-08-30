@@ -1,22 +1,25 @@
-﻿using TheEstimator.EstimateCalculators;
-using TheEstimator.Models;
+﻿using TheEstimator.Models;
 
 namespace TheEstimator.Repository;
 
 public class InMemoryRepository : IRepository
 {
-    private readonly List<Estimate> _estimates;
+    private List<Estimate> Estimates { get; }
     public InMemoryRepository()
     {
-        _estimates = new List<Estimate>();
+        Estimates = new List<Estimate>();
     }
 
     public Estimate Add(Estimate newEstimate, int generatedEstimate)
     {
-        newEstimate.Id = _estimates.Count + 1;
+        newEstimate.Id = Estimates.Count + 1;
         newEstimate.CalculatedEstimate = generatedEstimate;
-        _estimates.Add(newEstimate);
+        Estimates.Add(newEstimate);
         return newEstimate;
     }
+
+    public List<Estimate> GetAll() => Estimates;
+
+    public Estimate? Get(int id) => Estimates.FirstOrDefault(p => p.Id == id);
 
 }

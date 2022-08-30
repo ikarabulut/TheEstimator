@@ -5,7 +5,7 @@ public class PertCalculator : IEstimateCalculator
     public int CalculateEstimate(int mostLikely, int optimistic, int pessimistic)
     {
         ContainsNegativeParametersCheck(mostLikely, optimistic, pessimistic);
-        
+
         return (optimistic + (4 * mostLikely) + pessimistic) / 6;
     }
 

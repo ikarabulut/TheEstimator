@@ -21,6 +21,16 @@ public class InMemoryRepositoryFake : IRepository
         return newEstimate;
     }
 
+    public List<Estimate> GetAll()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Estimate? Get(int id)
+    {
+        throw new NotImplementedException();
+    }
+
 }
 
 public class PertControllerTests
