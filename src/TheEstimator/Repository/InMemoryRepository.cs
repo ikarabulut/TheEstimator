@@ -20,6 +20,6 @@ public class InMemoryRepository : IRepository
 
     public List<Estimate> GetAll() => Estimates;
 
-    public Estimate? Get(int id) => Estimates.FirstOrDefault(p => p.Id == id);
+    public Estimate? Get(int id) => Estimates.FirstOrDefault(estimate => estimate.Id == id);
 
 }

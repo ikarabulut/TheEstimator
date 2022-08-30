@@ -8,28 +8,34 @@ namespace TheEstimator.Tests.ControllersTests;
 
 public class InMemoryRepositoryFake : IRepository
 {
-    private readonly List<Estimate> _estimates;
+    private List<Estimate> Estimates { get; }
     public InMemoryRepositoryFake()
     {
-        _estimates = new List<Estimate>();
+        Estimates = new List<Estimate>
+        {
+            new()
+            {
+                Id = 1,
+                MostLikely = 0,
+                CalculatedEstimate = 0,
+                Optimistic = 0,
+                Pessimistic = 0
+            }
+        };
+
     }
     public Estimate Add(Estimate newEstimate, int generatedEstimate)
     {
-        newEstimate.Id = _estimates.Count + 1;
+        newEstimate.Id = Estimates.Count + 1;
         newEstimate.CalculatedEstimate = generatedEstimate;
-        _estimates.Add(newEstimate);
+        Estimates.Add(newEstimate);
         return newEstimate;
     }
 
-    public List<Estimate> GetAll()
-    {
-        throw new NotImplementedException();
-    }
+    public List<Estimate> GetAll() => Estimates;
 
-    public Estimate? Get(int id)
-    {
-        throw new NotImplementedException();
-    }
+    public Estimate? Get(int id) => Estimates.FirstOrDefault(estimate => estimate.Id == id);
+
 
 }
 
@@ -74,5 +80,36 @@ public class PertControllerTests
 
         Assert.IsType<Estimate>(estimate);
         Assert.Equal(0, estimate.CalculatedEstimate);
+    }
+
+    [Fact]
+    public void Index_ReturnedResponseListsAllEstimates()
+    {
+        List<Estimate> expectedResponseValues = _repository.GetAll();
+
+        ActionResult<List<Estimate>> createdResponse = _controller.Index();
+
+        Assert.Equal(expectedResponseValues, createdResponse.Value);
+    }
+
+    [Fact]
+    public void Get_ValidIdPassed_ReturnsIdMatchingEstimate()
+    {
+        const int validId = 1;
+        Estimate expectedResponseValue = _repository.Get(validId);
+
+        ActionResult<Estimate> createdResponse = _controller.Get(validId);
+
+        Assert.Equal(expectedResponseValue, createdResponse.Value);
+    }
+
+    [Fact]
+    public void Get_InvalidIdPassed_ReturnsNotFound()
+    {
+        const int invalidId = 2;
+
+        ActionResult<Estimate> createdResponse = _controller.Get(invalidId);
+
+        Assert.IsType<NotFoundResult>(createdResponse.Result);
     }
 }

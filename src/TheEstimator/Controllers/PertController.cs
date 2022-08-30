@@ -34,4 +34,18 @@ public class PertController : ControllerBase
         return CreatedAtAction(nameof(Create), new { id = createdEstimate.Id }, createdEstimate);
     }
 
+    [HttpGet]
+    public ActionResult<List<Estimate>> Index() => _repository.GetAll();
+
+    [HttpGet("{id:int}")]
+    public ActionResult<Estimate> Get(int id)
+    {
+        var estimate = _repository.Get(id);
+
+        if (estimate == null)
+            return NotFound();
+
+        return estimate;
+    }
+
 }
