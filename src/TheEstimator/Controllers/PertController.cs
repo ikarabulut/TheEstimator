@@ -26,10 +26,10 @@ public class PertController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var CalculatedEstimate =
+        var calculatedEstimate =
             _calculator.CalculateEstimate(estimate.MostLikely, estimate.Optimistic, estimate.Pessimistic);
 
-        var createdEstimate = _repository.Add(estimate, CalculatedEstimate);
+        var createdEstimate = _repository.Add(estimate, calculatedEstimate);
 
         return CreatedAtAction(nameof(Create), new { id = createdEstimate.Id }, createdEstimate);
     }
