@@ -1,4 +1,6 @@
-﻿using TheEstimator.Repository;
+﻿using Microsoft.EntityFrameworkCore;
+using TheEstimator.DataContext;
+using TheEstimator.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +11,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<EstimateContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("Database")));
+
 // Add the repository to be used globally
-builder.Services.AddScoped<IRepository, InMemoryRepository>();
+builder.Services.AddScoped<IRepository, EstimateRepository>();
 
 var app = builder.Build();
 
