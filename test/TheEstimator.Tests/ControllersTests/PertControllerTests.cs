@@ -118,8 +118,9 @@ public class PertControllerTests
         Estimate requestEstimate = new Estimate { Optimistic = 0, Pessimistic = 0, MostLikely = 0 };
         var expectedResponseValue = 0;
 
-        ActionResult<int> createdResponse = _controller.GetQuickEstimate(requestEstimate);
-
-        Assert.Equal(expectedResponseValue, createdResponse.Value);
+        var createdResponse = _controller.GetQuickEstimate(requestEstimate) as CreatedAtActionResult;
+        var estimate = createdResponse.Value;
+        
+        Assert.Equal(expectedResponseValue, estimate);
     }
 }

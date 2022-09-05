@@ -34,8 +34,8 @@ public class PertController : ControllerBase
         return CreatedAtAction(nameof(Create), new { id = createdEstimate.Id }, createdEstimate);
     }
     
-    [HttpGet("{quick}")]
-    public ActionResult<int> GetQuickEstimate(Estimate estimate)
+    [HttpPost("{quick}")]
+    public IActionResult GetQuickEstimate(Estimate estimate)
     {
         if (!ModelState.IsValid)
         {
@@ -45,7 +45,7 @@ public class PertController : ControllerBase
         var calculatedEstimate =
             _calculator.CalculateEstimate(estimate.MostLikely, estimate.Optimistic, estimate.Pessimistic);
 
-        return calculatedEstimate;
+        return CreatedAtAction(nameof(GetQuickEstimate), calculatedEstimate);
     }
 
     [HttpGet]
