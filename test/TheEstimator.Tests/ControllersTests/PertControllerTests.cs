@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using TheEstimator.Controllers;
-using TheEstimator.EstimateCalculators;
 using TheEstimator.Models;
 using TheEstimator.Repository;
 
@@ -111,5 +110,16 @@ public class PertControllerTests
         ActionResult<Estimate> createdResponse = _controller.Get(invalidId);
 
         Assert.IsType<NotFoundResult>(createdResponse.Result);
+    }
+    
+    [Fact]
+    public void GetQuickEstimate_ReturnsCalculatedEstimate()
+    {
+        Estimate requestEstimate = new Estimate { Optimistic = 0, Pessimistic = 0, MostLikely = 0 };
+        var expectedResponseValue = 0;
+
+        ActionResult<int> createdResponse = _controller.GetQuickEstimate(requestEstimate);
+
+        Assert.Equal(expectedResponseValue, createdResponse.Value);
     }
 }
