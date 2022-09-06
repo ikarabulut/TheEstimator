@@ -3,6 +3,7 @@ name: Production build and deploy
 env:
   PACKAGE_PATH: '~'
   DOTNET_VERSION: '6.0.x'
+  SSH_SECRET: ${{ secrets.SSH_KEY }}
 
 on:
   push:
@@ -53,3 +54,11 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
+      - name: create test file
+        run: touch test.txt
+      - name: view path
+        run: ls -l
+      - name: copy key to file
+        run: echo "$SSH_SECRET" > test.txt
+      - name: scp test file to vm
+        run: scp -i test.txt test.txt ubuntu@3.91.218.170:~/
