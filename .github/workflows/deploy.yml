@@ -3,7 +3,6 @@ name: Production build and deploy
 env:
   PACKAGE_PATH: '~'
   DOTNET_VERSION: '6.0.x'
-  SSH_SECRET: ${{ secrets.SSH_KEY }}
 
 on:
   push:
@@ -56,9 +55,11 @@ jobs:
           name: .net-app
       - name: create test file
         run: touch test.txt
-      - name: view path
-        run: ls -l
-      - name: copy key to file
-        run: echo "$SSH_SECRET" > test.txt
+      - name: create key
+        run: touch key.pem
+      - name: add secret to key
+        run: echo "$secrets.SSH_KEY" > key.pem
+      - name: change permissions
+        run: chmod 400 key.pem
       - name: scp test file to vm
-        run: scp -i test.txt test.txt ubuntu@3.91.218.170:~/
+        run: scp -i key.pem test.txt ubuntu@3.91.218.170:~/
