@@ -58,7 +58,7 @@ jobs:
       - name: create key
         run: touch key.pem
       - name: add secret to key
-        run: echo "$secrets.SSH_KEY" > key.pem
+        run: echo "${{ secrets.SSH_KEY }}" > key.pem
       - name: change permissions
         run: chmod 400 key.pem
       - name: scp test file to vm
