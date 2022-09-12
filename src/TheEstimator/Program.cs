@@ -31,19 +31,7 @@ builder.Services.AddCors(options =>
         });
 });
 
-// builder.WebHost.ConfigureKestrel(serverOptions =>
-// {
-//     serverOptions.ListenAnyIP(5001);
-// });
-
 var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
 
 app.UseForwardedHeaders(new ForwardedHeadersOptions
 {
