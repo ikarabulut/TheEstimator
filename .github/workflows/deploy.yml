@@ -1,7 +1,7 @@
 name: Production build and deploy
 
 env:
-  PACKAGE_PATH: '~'
+  PACKAGE_PATH: '~/theEstimatorApi'
   DOTNET_VERSION: '6.0.x'
 
 on:
@@ -32,17 +32,16 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -r ubuntu-x64 -o ~/release
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/theEstimator
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.PACKAGE_PATH}}/release
+          path: ${{env.DOTNET_ROOT}}/theEstimator
 
   deploy:
-    permissions:
-      contents: none
+    permissions: write-all
     runs-on: self-hosted
     needs: build
     environment:
@@ -53,17 +52,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      - name: check directory
-        run: pwd
-      - name: move back a directory
-        run: cd ..
-#      - name: create test file
-#        run: touch test.txt
-#      - name: create key
-#        run: touch key.pem
-#      - name: add secret to key
-#        run: echo "${{ secrets.SSH_KEY }}" > key.pem
-#      - name: change permissions
-#        run: chmod 400 key.pem
-#      - name: scp test file to vm
-#        run: scp -i key.pem test.txt ubuntu@3.91.218.170:~/
+          path: ${{env.PACKAGE_PATH}}/theEstimator
+      - name: Change executable permissions
+        run: chmod +x ~/theEstimatorApi/theEstimator/TheEstimator
+      - name: Start the app
+        run: ~/theEstimatorApi/theEstimator/TheEstimator
+      - name: stop the app
+        run: ^c
