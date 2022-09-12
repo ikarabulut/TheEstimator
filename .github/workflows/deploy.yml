@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v3
@@ -43,7 +43,7 @@ jobs:
   deploy:
     permissions:
       contents: none
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: build
     environment:
       name: 'Production'
@@ -53,13 +53,17 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: .net-app
-      - name: create test file
-        run: touch test.txt
-      - name: create key
-        run: touch key.pem
-      - name: add secret to key
-        run: echo "${{ secrets.SSH_KEY }}" > key.pem
-      - name: change permissions
-        run: chmod 400 key.pem
-      - name: scp test file to vm
-        run: scp -i key.pem test.txt ubuntu@3.91.218.170:~/
+      - name: check directory
+        run: pwd
+      - name: move back a directory
+        run: cd ..
+#      - name: create test file
+#        run: touch test.txt
+#      - name: create key
+#        run: touch key.pem
+#      - name: add secret to key
+#        run: echo "${{ secrets.SSH_KEY }}" > key.pem
+#      - name: change permissions
+#        run: chmod 400 key.pem
+#      - name: scp test file to vm
+#        run: scp -i key.pem test.txt ubuntu@3.91.218.170:~/
