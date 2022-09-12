@@ -58,4 +58,4 @@ jobs:
       - name: Change executable permissions
         run: chmod +x ~/theEstimatorApi/theEstimator/TheEstimator
       - name: Start the new Estimator Service
-        run: sudo systemctl stop the-estimatorApi.service
+        run: sudo systemctl start the-estimatorApi.service
