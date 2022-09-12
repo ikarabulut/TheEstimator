@@ -48,6 +48,8 @@ jobs:
       name: 'Production'
 
     steps:
+      - name: Stop the running Estimator Service
+        run: sudo systemctl stop the-estimatorApi.service
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
@@ -55,7 +57,5 @@ jobs:
           path: ${{env.PACKAGE_PATH}}/theEstimator
       - name: Change executable permissions
         run: chmod +x ~/theEstimatorApi/theEstimator/TheEstimator
-      - name: Start the app
-        run: ~/theEstimatorApi/theEstimator/TheEstimator
-      - name: stop the app
-        run: ^c
+      - name: Start the new Estimator Service
+        run: sudo systemctl stop the-estimatorApi.service
