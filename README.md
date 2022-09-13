@@ -1,5 +1,6 @@
 # The Estimator
 [![Build and Test](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml)
+[![Production build and deploy](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml)
 
 **I'll be back... to tell you that you way underestimated what you're about to estimate.**
 
@@ -12,14 +13,25 @@ This RESTful API was built to be used for a frontend app to generate different t
 
 ***
 
+### Hosted on Ubuntu server EC2
+http://ec2-3-91-218-170.compute-1.amazonaws.com
+
 ### Technologies used
 
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)
 - [ASP.NET Core 6](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-6.0)
+- [PostgreSQL 14](https://www.postgresql.org/docs/14/index.html)
+- [Nginx](https://nginx.org/en/docs/?_ga=2.117511050.245737080.1662998946-2117561888.1662998946)
+- [Github actions](https://docs.github.com/en/actions)
 
 ### Requirements
 
-- [.NET 6.0](https://dotnet.microsoft.com/en-us/download)
+- [.NET 6.0 Download page](https://dotnet.microsoft.com/en-us/download)
+- [PostgreSQL 14 Download page](https://www.postgresql.org/download/)
+  - Currently this app uses the default Username 'postgres' with no password. To alter the username locally, go to the appsettings.json and update 'database' in 'ConnectionStrings'
+  - Ensure Postgres is running locally by following the [Official Documentation](https://www.postgresql.org/docs/14/server-start.html)
+  - If you run into an authentication error you may need to update your postgres settings -> follow this [Stack Overflow](https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge)
+
 
 ***
 ### To make changes locally
@@ -48,10 +60,17 @@ To generate a PERT estimate send a POST request to `localhost:{PORT}/pert`
 "optimistic":"int"
 "pessimistic":"int"
 ```
-#### Sample POST request
+#### Sample POST request for a saved estimate
 ```
 curl -i -X POST http://localhost:{PORT}/pert
--h "content-Type: application/json"
+-h "Content-Type: application/json"
+-d "{"mostlikely":"{VALUE}", "optimistic":"{VALUE}", "pessimistic":"{VALUE}"}"
+```
+
+#### Sample POST request for a quick estimate (Not saved)
+```
+curl -i -X POST http://localhost:{PORT}/pert/quick
+-h "Content-Type: application/json"
 -d "{"mostlikely":"{VALUE}", "optimistic":"{VALUE}", "pessimistic":"{VALUE}"}"
 ```
 
