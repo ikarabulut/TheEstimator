@@ -1,6 +1,6 @@
 # The Estimator
 [![Build and Test](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/build-test.yml)
-[![Production build and deploy](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml)
+[![Production Deployment](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml/badge.svg)](https://github.com/ikarabulut/TheEstimator/actions/workflows/deploy.yml)
 
 **I'll be back... to tell you that you way underestimated what you're about to estimate.**
 
@@ -31,6 +31,8 @@ http://ec2-3-91-218-170.compute-1.amazonaws.com
   - Currently this app uses the default Username 'postgres' with no password. To alter the username locally, go to the appsettings.json and update 'database' in 'ConnectionStrings'
   - Ensure Postgres is running locally by following the [Official Documentation](https://www.postgresql.org/docs/14/server-start.html)
   - If you run into an authentication error you may need to update your postgres settings -> follow this [Stack Overflow](https://stackoverflow.com/questions/18664074/getting-error-peer-authentication-failed-for-user-postgres-when-trying-to-ge)
+- [dotnet ef CLI tool](https://docs.microsoft.com/en-us/ef/core/cli/dotnet)
+  - `dotnet tool install --global dotnet-ef`
 
 
 ***
@@ -41,6 +43,12 @@ git clone https://github.com/ikarabulut/TheEstimator.git
 cd TheEstimator
 dotnet build
 ```
+
+Create database migrations [Migrations overview .net docs](https://docs.microsoft.com/en-us/ef/core/managing-schemas/migrations/?tabs=dotnet-core-cli)
+```
+dotnet ef database update
+```
+
 To run the server:
 ```
 dotnet run --project ./src/TheEstimator
