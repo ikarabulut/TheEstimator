@@ -14,7 +14,6 @@ This RESTful API was built to be used for a frontend app to generate different t
 ***
 
 ### Hosted on Ubuntu server EC2
-http://ec2-3-91-218-170.compute-1.amazonaws.com
 
 ### Technologies used
 
